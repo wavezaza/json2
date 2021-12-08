@@ -14,47 +14,48 @@
         border: 2px solid black;
         text-align: center;
     }
+    .container{
+        display: flex;
+        justify-content: center;
+    }
+    .btn{
+        width: 100%;
+    }
 </style>
 <body>
-    <button id="B_Back"> back </button>
-    <div id="Main">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>comment</th>
-                </tr>
-            </thead>
-            <tbody id="TB_Post">
-            </tbody>
-        </table>
-    </div>
-
-    <div id="Detail">
-        <table>
-            <thead id="TBL_Details_1">
-
-            </thead>
-
-            <tbody id="TBL_Details">
-
-            </tbody>
-        </table>
-    </div>
-
-
-    <div id="Comment">
-        <table>
-            <thead id="TBL_Comment_1">
-                
-            </thead>
-            <tbody id="TBL_Comment">
-
-            </tbody>
-        </table>
-    </div>
+    <button class="btn" id="B_Back"> back </button>
+        <div class="container">
+            <div id="Main">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>comment</th>
+                        </tr>
+                    </thead>
+                    <tbody id="TB_Post">
+                    </tbody>
+                </table>
+            </div>
+            <div id="Detail">
+                <table>
+                    <thead id="TBL_Details_1">
+                    </thead>
+                    <tbody id="TBL_Details">
+                    </tbody>
+                </table>
+            </div>
+            <div id="Comment">
+                <table>
+                    <thead id="TBL_Comment_1">
+                    </thead>
+                    <tbody id="TBL_Comment">
+                    </tbody>
+                </table>
+            </div>
+        </div>
 </body>
 <script>
     function showDetails(id) {
@@ -70,7 +71,6 @@
                     line_t2 += "<th><b> UserId </b></th>"
                     line_t2 += "</tr>";
                     $("#TBL_Details_1").append(line_t2);
-
                 var line_t1 = "<tr id='Detail_ROW_1'";
                     line_t1 += "><td>" + data.id + "</td>"
                     line_t1 += "<td><b>" + data.title + "</b><br/>"
@@ -85,8 +85,8 @@
     function showComment(id) {
         $("#Main").hide();
         $("#Comment").show();
-        var url_comment = "https://jsonplaceholder.typicode.com/comments/" + id
-        $.getJSON(url_comment)
+        var url = "https://jsonplaceholder.typicode.com/comments/" + id
+        $.getJSON(url)
             .done((data) => {
                 console.log(data);                
                 var line_c2 = "<tr id='Comment_ROW'>";
@@ -97,7 +97,6 @@
                     line_c2 += "<th><b> PostID </b></th>"
                     line_c2 += "</tr>";
                     $("#TBL_Comment_1").append(line_c2);
-
                 var line_c1 = "<tr id='Comment_ROW_1'";
                     line_c1 += "><td>" + data.id + "</td>"
                     line_c1 += "<td><b>" + data.name+ "</b></td>"
@@ -115,7 +114,6 @@
         $.getJSON(url)
             .done((data) => {
                 $.each(data, (k, item) => {
-                    // console.log(item);
                     var line = "<tr>";
                     line += "<td>" + item.id + "</td>"
                     line += "<td><b>" + item.title + "</b><br/>"
